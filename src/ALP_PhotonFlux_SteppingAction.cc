@@ -70,7 +70,7 @@ void ALP_PhotonFlux_SteppingAction::UserSteppingAction(const G4Step* step)
       ->GetVolume()->GetLogicalVolume();
 
   auto analysisManager = G4AnalysisManager::Instance();
-  const G4TrackVector* secondary = step->GetSecondary();
+  const std::vector<const G4Track*>* secondary = step->GetSecondaryInCurrentStep();
   for( size_t lp = 0; lp < (*secondary).size(); lp++ )
   {
     analysisManager->FillNtupleSColumn(0, step->GetPostStepPoint()->GetProcessDefinedStep()->GetProcessName());
@@ -87,6 +87,7 @@ void ALP_PhotonFlux_SteppingAction::UserSteppingAction(const G4Step* step)
     analysisManager->FillNtupleSColumn(11, (*secondary)[lp]->GetDefinition()->GetParticleName() );
     analysisManager->FillNtupleSColumn(12, step->GetTrack()->GetParticleDefinition()->GetParticleName());
     analysisManager->FillNtupleDColumn(13, (volume == fTargetVolume)?1:0);
+    analysisManager->FillNtupleDColumn(14, (*secondary)[lp]->GetTrackLength()/CLHEP::nm);
     analysisManager->AddNtupleRow();
   }
 }

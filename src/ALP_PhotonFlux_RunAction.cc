@@ -69,6 +69,7 @@ ALP_PhotonFlux_RunAction::ALP_PhotonFlux_RunAction()
   analysisManager->CreateNtupleSColumn("pid");
   analysisManager->CreateNtupleSColumn("poststep_pid");     // pid of the mother particle
   analysisManager->CreateNtupleDColumn("inTarget");
+  analysisManager->CreateNtupleDColumn("trklen");
   analysisManager->FinishNtuple();
 }
 
