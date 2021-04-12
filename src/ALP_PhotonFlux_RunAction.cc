@@ -46,18 +46,6 @@
 ALP_PhotonFlux_RunAction::ALP_PhotonFlux_RunAction()
 : G4UserRunAction()
 {
-  // add new units for dose
-  //
-  const G4double milligray = 1.e-3*gray;
-  const G4double microgray = 1.e-6*gray;
-  const G4double nanogray  = 1.e-9*gray;
-  const G4double picogray  = 1.e-12*gray;
-
-  new G4UnitDefinition("milligray", "milliGy" , "Dose", milligray);
-  new G4UnitDefinition("microgray", "microGy" , "Dose", microgray);
-  new G4UnitDefinition("nanogray" , "nanoGy"  , "Dose", nanogray);
-  new G4UnitDefinition("picogray" , "picoGy"  , "Dose", picogray); 
-
   // Create analysis manager
   auto analysisManager = G4AnalysisManager::Instance();
   analysisManager->SetNtupleMerging(true);
@@ -107,11 +95,8 @@ void ALP_PhotonFlux_RunAction::BeginOfRunAction(const G4Run*)
   G4cout << "Using " << analysisManager->GetType() << G4endl;
 
   // Default settings
-  analysisManager->SetFileName("ALP_PhotonFlux"); // the actual file name will be ALP_PhotonFlux.root
+  analysisManager->SetFileName("/run/media/wyjang/Seagate5TB/data/ALP_PhotonFlux/P_120GeV_100000POT"); // the actual file name will be ALP_PhotonFlux.root
   analysisManager->OpenFile();
-
-  // Create 1-dimensional histogram
-  //analysisManager->CreateH1("Egamma", "", 100000, 0, 100000);
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
